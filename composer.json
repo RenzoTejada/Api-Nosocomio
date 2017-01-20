@@ -1,0 +1,51 @@
+{
+    "name": "RenzoTejada/zf2-skeleton",
+    "description": "ZF2 - Zend Framework 2 - Skeleton application for zend-mvc projects",
+    "keywords": [
+        "zf2"
+    ],
+    "config": {
+        "bin-dir": "vendor/bin/",
+        "process-timeout": 5000
+    },
+    "authors": [
+        {
+            "name": "Renzo Tejada",
+            "email": "renzzo09@gmail.com",
+            "role": "Developer Back-End"
+        }
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require-dev": {
+        "zendframework/zftool": "0.1.0",
+        "zendframework/zend-developer-tools": "1.0.0",
+        "phpunit/phpunit": "~5.0"
+    },
+    "require": {
+        "php": ">=5.6",
+        "ext-mongo": "*",
+        "zendframework/zendframework": "~2.5",
+        "zendframework/zend-mvc": "2.6.3",
+        "zendframework/zend-db": "2.7.0",
+        "zendframework/zend-session": "2.6.2",
+        "vgarvardt/zf-simple-migrations": "0.1.0",
+        "google/apiclient": "2.0.0-RC4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Base\\": "lib/Base/"
+        },
+        "classmap": [
+            "lib/Base/"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        },
+        {
+            "packagist": false
+        }
+    ]
+}
