@@ -26,3 +26,4 @@ extras/documentation
 
 # Vagrant files
 .vagrant/
+/nbproject/
