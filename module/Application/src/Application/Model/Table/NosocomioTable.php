@@ -17,4 +17,14 @@ class NosocomioTable extends AbstractTable
                 ->columns(array('institucion','direccion','lat' => 'norte', 'lng'=>'este'));
         return $this->fetchAll($select);
     }
+
+    public function getByIdNosocomio($id)
+    {
+        $sql = new Sql($this->getAdapter());
+        $select = $sql->select()
+                ->from($this->table)
+                ->columns(array('institucion','direccion','lat' => 'norte', 'lng'=>'este'))
+                ->where(array('codigo' =>$id));
+        return $this->fetchAll($select);
+    }
 }
