@@ -1,0 +1,46 @@
+<?php
+
+return array(
+    'modules' => array(
+        'Application',
+        'Agente',
+        'Cron',
+        'PerfilPago',
+        'Empresa',
+        'Gmap',
+        'Pagos',
+        'Ubigeo',
+        'Impreso',
+        'Aviso',
+        'Moderacion',
+        'Contacto',
+        'Favorito',
+        'Paquetes',
+        'Alertas',
+        'Usuario',
+        'Peruid',
+        'Cdn',
+        'CaoCsvOutput',
+        'DOMPDFModule',
+        'SolrClient',
+        'RabbitClient',
+        'ZfSimpleMigrations',
+        'Blog',
+        'Buscamas',
+        'Banner',
+        'Email',
+        'Correo',
+        'Core',
+        'Yoson',
+        'Extorno',
+        'Empresas',
+        'Urbania',
+        'Banco',
+        'Cintillo'
+    ),
+
+    'module_listener_options' => array(
+        'config_glob_paths' => array('../../../config/autoload/{,*.}{global,local}.php'),
+        'module_paths' => array('depends', 'module', 'website', 'vendor'),
+    ),
+);
