@@ -26,8 +26,10 @@ class NosocomioRestController extends AbstractRestfulController
 
     public function get($id)
     {
-        $page = $this->params()->fromQuery("page", 1);        
+        $page = $this->params()->fromQuery("page", 1);
         $data['pages'] = $page;
+        $model = $this->getServiceLocator()->get('NosocomioModel');
+        $data['data'] = $model->getAllNosocomio();
 
         return new JsonModel($data);
     }

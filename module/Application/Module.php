@@ -40,7 +40,7 @@ class Module
             ),
         );
     }
-    
+
     public function getServiceConfig()
     {
         return array(
@@ -69,9 +69,14 @@ class Module
                     $TestTable = new Table\TestTable('test', $sm->get('DbAdapter'));
                     return $TestTable;
                 },
+                'NosocomioTable' => function ($sm) {
+                    $NosocomioTable = new Table\NosocomioTable('nosocomio', $sm->get('DbAdapter'));
+                    return $NosocomioTable;
+                },
             ),
             'aliases' => array(
                 'TestModel' => 'TestTable',
+                'NosocomioModel' => 'NosocomioTable',
             ),
         );
     }
