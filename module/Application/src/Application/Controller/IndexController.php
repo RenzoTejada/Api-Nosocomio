@@ -18,44 +18,89 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        $layout = $this->layout();
-        $layout->setTemplate('layout/login');
-        $viewModel = new ViewModel();
-        return $viewModel;
+        if (!$this->verificarSesion()) {
+            if ($this->getRequest()->isPost()) {
+                $data = $this->getRequest()->getPost();
+                $model = $this->getServiceLocator()->get('UsuarioModel');
+                $user = $model->validarUsuario($data['correo'], $data['pass']);
+                if ($user) {
+                    $session = new \Zend\Session\Container('session');
+                    $session->offsetSet('dataUser', $user);
+                    $this->redirect()->toUrl('/dashboard');
+                } else {
+                    $this->flashMessenger()->addErrorMessage("El Email no existe, Registrarse.");
+                    $this->redirect()->toUrl('/registrarse');
+                }
+            }
+
+            $layout = $this->layout();
+            $layout->setTemplate('layout/login');
+            $viewModel = new ViewModel();
+            return $viewModel;
+        } else {
+            $this->redirect()->toUrl('/dashboard');
+        }
     }
 
     public function registrarseAction()
     {
-        if ($this->getRequest()->isPost()) {
-           $data= $this->getRequest()->getPost();
-           $model = $this->getServiceLocator()->get('UsuarioModel');
+        if (!$this->verificarSesion()) {
+            if ($this->getRequest()->isPost()) {
+                $data = $this->getRequest()->getPost();
+                $model = $this->getServiceLocator()->get('UsuarioModel');
 
-           if (!$model->buscarUsuario($data['correo'])) {
-                $datos = array(
-                    'email' => $data['correo'],
-                    'password' => $data['pass']
-                );
-                $rpt = $model->guardarUsuario($datos);
-                if ($rpt) {
-                    $this->redirect()->toUrl('/dashboard');
+                if (!$model->buscarUsuario($data['correo'])) {
+                    $datos = array(
+                        'email' => $data['correo'],
+                        'password' => $data['pass']
+                    );
+                    $rpt = $model->guardarUsuario($datos);
+                    if ($rpt) {
+                        $this->redirect()->toUrl('/dashboard');
+                    } else {
+                        $this->flashMessenger()->addErrorMessage("Ocurrio un error inesperado, contacte al administrador.");
+                        $this->redirect()->toUrl('/registrarse');
+                    }
                 } else {
-                    $this->flashMessenger()->addErrorMessage("Ocurrio un error inesperado, contacte al administrador.");
-                    $this->redirect()->toUrl('/registrarse');
-                }
-            } else {
-                $this->flashMessenger()->addErrorMessage("El Email ya existe, Inicie Sesión.");
+                    $this->flashMessenger()->addErrorMessage("El Email ya existe, Inicie Sesión.");
                     $this->redirect()->toUrl('/');
+                }
             }
+            $layout = $this->layout();
+            $layout->setTemplate('layout/login');
+            $viewModel = new ViewModel();
+            return $viewModel;
+        } else {
+            $this->redirect()->toUrl('/dashboard');
         }
-        $layout = $this->layout();
-        $layout->setTemplate('layout/login');
-        $viewModel = new ViewModel();
-        return $viewModel;
     }
-    
+
     public function dashboardAction()
     {
-        return new ViewModel();
+        if ($this->verificarSesion()) {
+            return new ViewModel();
+        } else {
+            $this->redirect()->toUrl('/');
+        }
+    }
+
+    public function logoutAction()
+    {
+        $session = new \Zend\Session\Container('session');
+        if ($session->offsetExists('dataUser')) {
+            $session->offsetUnset('dataUser');
+        }
+        $this->redirect()->toUrl('/');
+    }
+
+    function verificarSesion()
+    {
+        $session = new \Zend\Session\Container('session');
+        $rpt = FALSE;
+        if ($session->offsetExists('dataUser')) {
+            $rpt = TRUE;
+        }
+        return $rpt;
     }
 
     public function modelAction()

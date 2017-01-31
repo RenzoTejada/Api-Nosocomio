@@ -5,12 +5,12 @@
 <div id="login-page">
     <div class="container">
 
-        <form class="form-login" action="">
+        <form class="form-login" action="" method="post">
             <h2 class="form-login-heading">Iniciar sesión</h2>
             <div class="login-wrap">
-                <input type="text" class="form-control" placeholder="Correo" autofocus>
+                <input type="text" name="correo" class="form-control" placeholder="Correo" autofocus>
                 <br>
-                <input type="password" class="form-control" placeholder="Contraseña">
+                <input type="password" name="pass" class="form-control" placeholder="Contraseña">
                 <label class="checkbox">
                     <span class="pull-right">
                         <!--<a data-toggle="modal" href="/#myModal"> Recuperar Contraseña?</a>-->
@@ -34,7 +34,7 @@
             </div>
 
             <!-- Modal -->
-            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+<!--            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!-- modal -->
         </form>	  	
 

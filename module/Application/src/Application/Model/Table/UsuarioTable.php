@@ -12,7 +12,7 @@ class UsuarioTable extends AbstractTable
     {
         return $this->_guardar($param);
     }
-    
+
     public function buscarUsuario($email)
     {
         $sql = new Sql($this->getAdapter());
@@ -22,5 +22,15 @@ class UsuarioTable extends AbstractTable
                 ->where(array('email' => $email));
         return $this->fetchOne($select);
     }
-    
+
+    public function validarUsuario($email, $password)
+    {
+        $sql = new Sql($this->getAdapter());
+        $select = $sql->select()
+                ->from($this->table)
+                ->columns(array('id','name','email'))
+                ->where(array('email' => $email, 'password' => $password));
+        return $this->fetchRow($select);
+    }
+
 }
