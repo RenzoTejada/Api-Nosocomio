@@ -83,6 +83,26 @@ return array(
                     ),
                 ),
             ),
+            'call' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/call',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'call',
+                    ),
+                ),
+            ),
+            'maps' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/maps',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'maps',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

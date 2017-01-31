@@ -77,7 +77,31 @@ class IndexController extends AbstractActionController
 
     public function dashboardAction()
     {
-        if ($this->verificarSesion()) {
+        $session = $this->verificarSesion();
+        if ($session) {
+            $this->layout()->user = $session['email'];
+            return new ViewModel();
+        } else {
+            $this->redirect()->toUrl('/');
+        }
+    }
+    
+    public function callAction()
+    {
+        $session = $this->verificarSesion();
+        if ($session) {
+            
+            return new ViewModel();
+        } else {
+            $this->redirect()->toUrl('/');
+        }
+    }
+    
+    public function mapsAction()
+    {
+        $session = $this->verificarSesion();
+        if ($session) {
+            
             return new ViewModel();
         } else {
             $this->redirect()->toUrl('/');
@@ -98,7 +122,7 @@ class IndexController extends AbstractActionController
         $session = new \Zend\Session\Container('session');
         $rpt = FALSE;
         if ($session->offsetExists('dataUser')) {
-            $rpt = TRUE;
+            $rpt = $session->offsetGet('dataUser');
         }
         return $rpt;
     }
