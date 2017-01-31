@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -14,18 +15,30 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+
     public function indexAction()
     {
-        return new ViewModel();
+        $layout = $this->layout();
+        $layout->setTemplate('layout/login');
+        $viewModel = new ViewModel();
+        return $viewModel;
     }
-    
+
+    public function registrarseAction()
+    {
+        $layout = $this->layout();
+        $layout->setTemplate('layout/login');
+        $viewModel = new ViewModel();
+        return $viewModel;
+    }
+
     public function modelAction()
     {
         $model = $this->getServiceLocator()->get('TestModel');
         $data = $model->getTestAll();
         return new ViewModel(array("data" => $data));
     }
-    
+
     public function mongodbAction()
     {
         $Colection = $this->getServiceLocator()->get('TestCollection');
@@ -33,4 +46,5 @@ class IndexController extends AbstractActionController
         \Zend\Debug\Debug::dump($data);
         return new ViewModel(array("data" => $data));
     }
+
 }
