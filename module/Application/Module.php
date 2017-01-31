@@ -73,10 +73,15 @@ class Module
                     $NosocomioTable = new Table\NosocomioTable('nosocomio', $sm->get('DbAdapter'));
                     return $NosocomioTable;
                 },
+                'UsuarioTable' => function ($sm) {
+                    $UsuarioTable = new Table\UsuarioTable('usuario', $sm->get('DbAdapter'));
+                    return $UsuarioTable;
+                },
             ),
             'aliases' => array(
                 'TestModel' => 'TestTable',
                 'NosocomioModel' => 'NosocomioTable',
+                'UsuarioModel' => 'UsuarioTable',
             ),
         );
     }

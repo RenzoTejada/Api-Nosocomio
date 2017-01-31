@@ -26,10 +26,36 @@ class IndexController extends AbstractActionController
 
     public function registrarseAction()
     {
+        if ($this->getRequest()->isPost()) {
+           $data= $this->getRequest()->getPost();
+           $model = $this->getServiceLocator()->get('UsuarioModel');
+
+           if (!$model->buscarUsuario($data['correo'])) {
+                $datos = array(
+                    'email' => $data['correo'],
+                    'password' => $data['pass']
+                );
+                $rpt = $model->guardarUsuario($datos);
+                if ($rpt) {
+                    $this->redirect()->toUrl('/dashboard');
+                } else {
+                    $this->flashMessenger()->addErrorMessage("Ocurrio un error inesperado, contacte al administrador.");
+                    $this->redirect()->toUrl('/registrarse');
+                }
+            } else {
+                $this->flashMessenger()->addErrorMessage("El Email ya existe, Inicie Sesión.");
+                    $this->redirect()->toUrl('/');
+            }
+        }
         $layout = $this->layout();
         $layout->setTemplate('layout/login');
         $viewModel = new ViewModel();
         return $viewModel;
+    }
+    
+    public function dashboardAction()
+    {
+        return new ViewModel();
     }
 
     public function modelAction()
