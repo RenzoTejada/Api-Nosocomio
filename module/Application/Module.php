@@ -85,4 +85,19 @@ class Module
             ),
         );
     }
+    
+    public function getViewHelperConfig()
+    {
+        return array(
+            'initializers' => array(
+                    function ($instance, $sm) {
+                        if ($instance instanceof ViewConfigInterface) {
+                            $locator = $sm->getServiceLocator();
+                            $config = $locator->get('Config');
+                            $instance->setConfig($config);
+                        }
+                    }
+            )
+        );
+    }
 }

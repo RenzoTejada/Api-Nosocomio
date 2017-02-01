@@ -146,6 +146,16 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'view_helpers' => [
+        'factories' => [
+            'linkCdn' => 'Application\View\Helper\Factory\LinkCdnFactory',
+            'linkElements' => 'Application\View\Helper\Factory\LinkElementsFactory',
+        ],
+        'invokables' => [
+        ],
+        'aliases' => array(
+        ),
+    ],
     // Placeholder for console routes
     'console' => array(
         'router' => array(

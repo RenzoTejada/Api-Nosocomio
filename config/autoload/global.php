@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Local Configuration Override
  *
@@ -10,7 +11,6 @@
  * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
  * credentials from accidentally being committed into version control.
  */
-
 return [
     'db' => [
         'driver' => 'pdo_mysql',
@@ -38,5 +38,21 @@ return [
         'factories' => [
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
         ]
+    ],
+    'cdn' => [
+        'link_helper' => [
+            'enabled' => true,
+        ],
+        'statics' => array(
+            'scheme' => NULL,
+            'host' => 'api-nosocomio.local',
+            'port' => NULL,
+        ),
+        'elements' => array(
+            'scheme' => NULL,
+            'host' => 'api-nosocomio.local',
+            'port' => NULL,
+        ),
+        'file_lastCommit' => ROOT_PATH . 'last_commit',
     ],
 ];
