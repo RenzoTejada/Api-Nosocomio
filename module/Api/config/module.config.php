@@ -33,20 +33,19 @@ return array(
                             ),
                         ),
                     ),
-                    'nosocomio-rest' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/nosocomio-rest/[:id]',
-                            'constraints' => array(
-                                'id' => '[0-9-]+'
-                            ),
-                            'defaults' => array(
-                                '__NAMESPACE__' => 'Api\Controller',
-                                'controller' => 'NosocomioRest'
-                            ),
-                        ),
+                ),
+            ),
+            'nosocomio-rest' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/nosocomio-rest/[:id]',
+                    'constraints' => array(
+                        'id' => '[0-9-]+'
                     ),
-
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Api\Controller',
+                        'controller' => 'NosocomioRest'
+                    ),
                 ),
             ),
         ),
