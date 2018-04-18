@@ -23,7 +23,6 @@
     },
     "require": {
         "php": ">=5.6",
-        "ext-mongo": "*",
         "zendframework/zendframework": "~2.5",
         "zendframework/zend-mvc": "2.6.3",
         "zendframework/zend-db": "2.7.0",

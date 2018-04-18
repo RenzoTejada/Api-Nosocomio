@@ -1,0 +1,50 @@
+version : '3'
+ 
+services:
+    webserver:
+        build: ./docker/php
+        container_name: "api"
+        ports:
+            - "80:80"
+        networks:
+            backend-net:
+                ipv4_address: 20.0.111.2
+        volumes:
+            - .:/var/www/html
+            - "./docker/php/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini"
+            - "/etc/timezone:/etc/timezone:ro"
+            - "/etc/localtime:/etc/localtime:ro"
+            - "./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+        links:
+            - db
+        depends_on:
+            - db
+        command: bash -c "apache2-foreground"
+            
+    db:
+        image: mysql:5.6
+        ports:
+            - "3306:3306"
+        networks:
+            backend-net:
+                ipv4_address: 20.0.111.3
+        volumes:
+          - db_data:/var/lib/mysql
+        restart: always
+        environment:
+          MYSQL_ROOT_PASSWORD: nosocomio
+          MYSQL_DATABASE: bd_nosocomio
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+
+
+networks:
+    backend-net:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 20.0.111.0/26
+
+volumes:
+    db_data:
