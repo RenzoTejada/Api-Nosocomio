@@ -1,14 +1,14 @@
 version : '3'
- 
+
 services:
     webserver:
         build: ./docker/php
         container_name: "api"
         ports:
-            - "80:80"
+            - "8080:80"
         networks:
-            backend-net:
-                ipv4_address: 20.0.111.2
+            api-nosocomio-static-network:
+                ipv4_address: 175.26.128.3
         volumes:
             - .:/var/www/html
             - "./docker/php/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini"
@@ -20,14 +20,14 @@ services:
         depends_on:
             - db
         command: bash -c "apache2-foreground"
-            
+
     db:
         image: mysql:5.6
         ports:
             - "3306:3306"
         networks:
-            backend-net:
-                ipv4_address: 20.0.111.3
+            api-nosocomio-static-network:
+                ipv4_address: 175.26.128.4
         volumes:
           - db_data:/var/lib/mysql
         restart: always
@@ -39,12 +39,10 @@ services:
 
 
 networks:
-    backend-net:
-        driver: bridge
+   api-nosocomio-static-network:
         ipam:
-            driver: default
             config:
-                - subnet: 20.0.111.0/26
+                - subnet: 175.26.0.0/16
 
 volumes:
     db_data:
